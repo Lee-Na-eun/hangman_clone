@@ -1,4 +1,4 @@
-const programmingLanguages: Array<string> = [
+const programmingLanguages = [
   'javascript',
   'python',
   'typescript',
@@ -13,10 +13,10 @@ const programmingLanguages: Array<string> = [
   'css',
 ];
 
-let answer: string = '';
-let maxWrong: number = 6;
-let mistake: number = 0;
-let guessed: Array<string> = [];
+let answer = '';
+let maxWrong = 6;
+let mistake = 0;
+let guessed = [];
 let wordStatus = null;
 
 const randomWord = () => {
@@ -24,7 +24,34 @@ const randomWord = () => {
     programmingLanguages[
       Math.floor(Math.random() * programmingLanguages.length)
     ];
-  console.log(answer);
 };
 
+const generateButtons = () => {
+  let buttonHtml = 'abcdefghijklmnopqrstuvwxyz'
+    .split('')
+    .map(
+      (letter) =>
+        `
+  <button class='btn btn-lg btn-primary m-2'
+    id = '` +
+        letter +
+        `
+    onClick="handleGuess('` +
+        letter +
+        `')"
+  >
+  ` +
+        letter +
+        `
+  </button>
+  `
+    )
+    .join('');
+
+  document.getElementById('keyboard').innerHTML = buttonHtml;
+};
+
+document.getElementById('maxWrong').innerHTML = maxWrong;
+
 randomWord();
+generateButtons();
