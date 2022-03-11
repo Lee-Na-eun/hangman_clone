@@ -70,7 +70,7 @@ const guessedWord = () => {
 const handleGuess = (chosenLetter) => {
   guessed.indexOf(chosenLetter) === -1 ? guessed.push(chosenLetter) : null;
 
-  document.getElementById(chosenLetter).setAttribute('disabled', true);
+  document.getElementById(chosenLetter).setAttribute('disabled', String);
 
   alert(answer);
 
