@@ -13,7 +13,7 @@ const programmingLanguages = [
   'css',
 ];
 
-let answer = '';
+let answer: string = '';
 let maxWrong = 6;
 let mistake = 0;
 let guessed = [];
@@ -72,8 +72,6 @@ const handleGuess = (chosenLetter) => {
 
   document.getElementById(chosenLetter).setAttribute('disabled', true);
 
-  alert(answer);
-
   if (answer.indexOf(chosenLetter) >= 0) {
     guessedWord();
     checkIfGameWon();
@@ -81,7 +79,13 @@ const handleGuess = (chosenLetter) => {
     mistake++;
     updateMistake();
     checkIfGameLost();
+    updateHangmanPicture();
   }
+};
+
+const updateHangmanPicture = () => {
+  const aaa = document.getElementById('hangmanPic') as HTMLImageElement;
+  aaa.src = './images/' + mistake + '.jpg';
 };
 
 const checkIfGameWon = () => {
@@ -92,8 +96,23 @@ const checkIfGameWon = () => {
 
 const checkIfGameLost = () => {
   if (mistake === maxWrong) {
+    document.getElementById('wordSpotlight').innerHTML =
+      'The answer was : ' + answer;
     document.getElementById('keyboard').innerHTML = 'You Lost!!';
   }
+};
+
+const reset = () => {
+  mistake = 0;
+  guessed = [];
+
+  document.createElement('img').src = './images/0.jpg';
+  // document.getElementById('hangmanPic').src = './images/0.jpg';
+
+  randomWord();
+  guessedWord();
+  updateMistake();
+  generateButtons();
 };
 
 const updateMistake = () => {
