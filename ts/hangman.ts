@@ -14,10 +14,10 @@ const programmingLanguages = [
 ];
 
 let answer: string = '';
-let maxWrong = 6;
-let mistake = 0;
-let guessed = [];
-let wordStatus = null;
+let maxWrong: number = 6;
+let mistake: number = 0;
+let guessed: Array<string> = [];
+let wordStatus: any = null;
 
 const randomWord = () => {
   answer =
@@ -57,13 +57,6 @@ const guessedWord = () => {
     .map((letter) => (guessed.indexOf(letter) >= 0 ? letter : ' _ '))
     .join('');
 
-  console.log(answer);
-
-  console.log(
-    answer
-      .split('')
-      .map((letter) => (guessed.indexOf(letter) >= 0 ? letter : ' _ '))
-  );
   document.getElementById('wordSpotlight').innerHTML = wordStatus;
 };
 
@@ -84,8 +77,10 @@ const handleGuess = (chosenLetter) => {
 };
 
 const updateHangmanPicture = () => {
-  const aaa = document.getElementById('hangmanPic') as HTMLImageElement;
-  aaa.src = './images/' + mistake + '.jpg';
+  const updatePicture = document.getElementById(
+    'hangmanPic'
+  ) as HTMLImageElement;
+  updatePicture.src = './images/' + mistake + '.jpg';
 };
 
 const checkIfGameWon = () => {
@@ -106,8 +101,12 @@ const reset = () => {
   mistake = 0;
   guessed = [];
 
-  document.createElement('img').src = './images/0.jpg';
-  // document.getElementById('hangmanPic').src = './images/0.jpg';
+  // document.createElement('img').src = './images/0.jpg';
+  const resetPicture = document.getElementById(
+    'hangmanPic'
+  ) as HTMLImageElement;
+
+  resetPicture.src = './images/0.jpg';
 
   randomWord();
   guessedWord();
@@ -116,10 +115,10 @@ const reset = () => {
 };
 
 const updateMistake = () => {
-  document.getElementById('mistake').innerHTML = mistake;
+  document.getElementById('mistake').innerHTML = '' + mistake;
 };
 
-document.getElementById('maxWrong').innerHTML = maxWrong;
+document.getElementById('maxWrong').innerHTML = '' + maxWrong;
 
 randomWord();
 generateButtons();
