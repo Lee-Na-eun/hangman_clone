@@ -70,13 +70,34 @@ const guessedWord = () => {
 const handleGuess = (chosenLetter) => {
   guessed.indexOf(chosenLetter) === -1 ? guessed.push(chosenLetter) : null;
 
-  document.getElementById(chosenLetter).setAttribute('disabled', String);
+  document.getElementById(chosenLetter).setAttribute('disabled', true);
 
   alert(answer);
 
   if (answer.indexOf(chosenLetter) >= 0) {
     guessedWord();
+    checkIfGameWon();
+  } else if (answer.indexOf(chosenLetter) === -1) {
+    mistake++;
+    updateMistake();
+    checkIfGameLost();
   }
+};
+
+const checkIfGameWon = () => {
+  if (wordStatus === answer) {
+    document.getElementById('keyboard').innerHTML = 'You Won!!';
+  }
+};
+
+const checkIfGameLost = () => {
+  if (mistake === maxWrong) {
+    document.getElementById('keyboard').innerHTML = 'You Lost!!';
+  }
+};
+
+const updateMistake = () => {
+  document.getElementById('mistake').innerHTML = mistake;
 };
 
 document.getElementById('maxWrong').innerHTML = maxWrong;
